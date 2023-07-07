@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8" />
@@ -24,6 +24,113 @@
             <img src="{{x.photo.url}}" class="img-fluid" />
         </div>
         {% endfor %}
+    </div>
+
+    <script src="" async defer></script>
+  </body>
+</html> {% endcomment %}
+
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Image Uploader</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #f5f5f5;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .upload-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .upload-form h1 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .upload-form .form-group {
+        margin-bottom: 10px;
+      }
+
+      .upload-form label {
+        display: block;
+        font-weight: bold;
+      }
+
+      .upload-form input[type="file"] {
+        margin-top: 5px;
+      }
+
+      .upload-form .btn {
+        padding: 10px 20px;
+        background-color: #f44336;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .upload-form .btn:hover {
+        background-color: #d32f2f;
+      }
+
+      .image-gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 30px;
+      }
+
+      .image-gallery .image-item {
+        flex: 0 0 200px;
+        margin: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .image-gallery img {
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="upload-form">
+        <h1>Upload Image</h1>
+        <form action="" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="image">Select an image:</label>
+            <input type="file" name="image" id="image" accept="image/*" />
+          </div>
+          <input type="submit" class="btn" value="Upload" />
+        </form>
+      </div>
+      <div class="image-gallery">
+        {% for image in images %}
+        <div class="image-item">
+          <img src="{{ image.photo.url }}" alt="Uploaded Image" />
+        </div>
+        {% endfor %}
+      </div>
     </div>
 
     <script src="" async defer></script>
